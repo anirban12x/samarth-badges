@@ -460,83 +460,90 @@ select.category-input option {
       };
 
       const draw = () => {
-        banner = new Image();
-        banner.src = "./" + who + append + ".png";
-        banner.onload = () => {
-          if (image) {
-            switch (shape) {
-              case "original": {
-                canvas.width = image.width;
-                canvas.height = image.height;
-                ctx.drawImage(image, 0, 0);
-                break;
-              }
-              default: {
-                const size = Math.min(image.width, image.height);
-                canvas.width = 500;
-                canvas.height = 500;
-                const hRatio = canvas.width / image.width;
-                const vRatio = canvas.height / image.height;
-                const ratio = Math.max(hRatio, vRatio);
-                const x = (canvas.width - image.width * ratio) / 2;
-                const y = (canvas.height - image.height * ratio) / 2;
-                ctx.drawImage(
-                  image,
-                  0,
-                  0,
-                  image.width,
-                  image.height,
-                  x,
-                  y,
-                  image.width * ratio,
-                  image.height * ratio
-                );
-                break;
-              }
-            }
-          } else {
-            ctx.canvas.width = 540;
-            ctx.canvas.height = 540;
-            ctx.fillStyle = "rgba(30, 30, 30, 0.8)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-          }
-
-          const height = (banner.height / banner.width) * canvas.width;
-          const y = canvas.height - height;
-          const fontSize = canvas.width / 17.2;
-          const fontY = y + height * 0.7;
+  banner = new Image();
+  banner.src = "./" + who + append + ".png";
+  banner.onload = () => {
+    if (image) {
+      switch (shape) {
+        case "original": {
+          canvas.width = image.width;
+          canvas.height = image.height;
+          ctx.drawImage(image, 0, 0);
+          break;
+        }
+        default: {
+          const size = Math.min(image.width, image.height);
+          canvas.width = 500;
+          canvas.height = 500;
+          const hRatio = canvas.width / image.width;
+          const vRatio = canvas.height / image.height;
+          const ratio = Math.max(hRatio, vRatio);
+          const x = (canvas.width - image.width * ratio) / 2;
+          const y = (canvas.height - image.height * ratio) / 2;
           ctx.drawImage(
-            banner,
+            image,
             0,
             0,
-            banner.width,
-            banner.height,
-            0,
+            image.width,
+            image.height,
+            x,
             y,
-            canvas.width,
-            height
+            image.width * ratio,
+            image.height * ratio
           );
+          break;
+        }
+      }
+    } else {
+      ctx.canvas.width = 540;
+      ctx.canvas.height = 540;
+      ctx.fillStyle = "rgba(30, 30, 30, 0.8)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
 
-          ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.font = `${fontSize}px Google Sans, sans-serif`;
+    // ✅ Add purple border
+    ctx.strokeStyle = "#6406ae";
+    ctx.lineWidth = 6; // Adjust thickness if needed
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-          if (shape === "circle") {
-            ctx.globalCompositeOperation = "destination-in";
-            ctx.beginPath();
-            ctx.arc(
-              canvas.width / 2,
-              canvas.height / 2,
-              canvas.height / 2,
-              0,
-              Math.PI * 2
-            );
-            ctx.closePath();
-            ctx.fill();
-          }
-        };
-      };
+    const height = (banner.height / banner.width) * canvas.width;
+    const y = canvas.height - height;
+    const fontSize = canvas.width / 17.2;
+    const fontY = y + height * 0.7;
+
+    ctx.drawImage(
+      banner,
+      0,
+      0,
+      banner.width,
+      banner.height,
+      0,
+      y,
+      canvas.width,
+      height
+    );
+
+    ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = `${fontSize}px Google Sans, sans-serif`;
+
+    if (shape === "circle") {
+      ctx.globalCompositeOperation = "destination-in";
+      ctx.beginPath();
+      ctx.arc(
+        canvas.width / 2,
+        canvas.height / 2,
+        canvas.height / 2,
+        0,
+        Math.PI * 2
+      );
+      ctx.closePath();
+      ctx.fill();
+    }
+  };
+};
+
 
       const download = () => {
         const a = document.createElement("a");
