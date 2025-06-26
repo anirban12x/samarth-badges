@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Member Badge 2025</title>
+    <meta name="description" content="Social Media Badge Generator - Samarth" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="fav.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="member.png" />
+    <link
+      crossorigin="anonymous"
+      href="https://fonts.googleapis.com/icon?family=Google+Sans:400,500,600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style>
+      :root {
+        --primary: #8a2be2;
+        --primary-dark: #6a1bb3;
+        --primary-light: #a45bf0;
+        --bg-dark: #121212;
+        --bg-darker: #0a0a0a;
+        --bg-light: #1e1e1e;
+        --text-primary: rgba(255, 255, 255, 0.87);
+        --text-secondary: rgba(255, 255, 255, 0.6);
+        --text-disabled: rgba(255, 255, 255, 0.38);
+        --border-radius: 12px;
+        --border-radius-sm: 8px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        background: linear-gradient(135deg, var(--bg-darker), var(--bg-dark));
+        margin: 0;
+        font-family: "Google Sans", sans-serif;
+        display: flex;
+        flex-direction: column;
+        color: var(--text-primary);
+        min-height: 100vh;
+      }
+
+      header {
+        background: rgba(30, 30, 30, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 600;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        z-index: 10;
+        position: relative;
+      }
+
+      .title {
+        background: linear-gradient(90deg, var(--primary), #e100ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .main-container {
+        display: flex;
+        flex: 1;
+        gap: 24px;
+        padding: 24px;
+      }
+
+      .input-panel {
+        padding: 24px;
+        width: 380px;
+        background: rgba(30, 30, 30, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: var(--border-radius);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+        display: flex;
+        flex-direction: column;
+        transition: var(--transition);
+      }
+
+      .input-panel:hover {
+        border-color: rgba(138, 43, 226, 0.3);
+      }
+
+      .input {
+        margin-bottom: 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .input:last-child {
+        margin-bottom: 0;
+      }
+
+      .input label {
+        font-size: 14px;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--text-secondary);
+      }
+
+      .button {
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: var(--border-radius-sm);
+        padding: 12px 20px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        cursor: pointer;
+        border: none;
+        transition: var(--transition);
+        box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .button:hover {
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+        transform: translateY(-1px);
+      }
+
+      .button:active {
+        transform: translateY(0);
+      }
+
+      input.category-input {
+        font-size: 14px;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--border-radius-sm);
+        width: 100%;
+        color: var(--text-primary);
+        transition: var(--transition);
+      }
+
+      input.category-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .select-container {
+        display: flex;
+        border-radius: var(--border-radius-sm);
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .select-container .select {
+        background-color: transparent;
+        padding: 10px 16px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: var(--transition);
+        text-align: center;
+        flex: 1;
+        color: var(--text-secondary);
+      }
+
+      .select-container .select:not(:last-child) {
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .select-container .select[selected] {
+        color: white;
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        font-weight: 500;
+      }
+
+      .select-container .select:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .preview-panel {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border-radius: var(--border-radius);
+        background: rgba(30, 30, 30, 0.4);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px dashed rgba(255, 255, 255, 0.1);
+        transition: var(--transition);
+      }
+
+      .preview-panel:hover {
+        border-color: rgba(138, 43, 226, 0.3);
+      }
+
+      canvas {
+        width: 500px;
+        max-width: 80%;
+        border-radius: var(--border-radius);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .download-fab {
+        cursor: pointer;
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        box-shadow: 0 4px 20px rgba(138, 43, 226, 0.4);
+        transition: var(--transition);
+        border: none;
+      }
+
+      .download-fab:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 6px 24px rgba(138, 43, 226, 0.5);
+      }
+
+      .download-fab:active {
+        transform: translateY(0) scale(1);
+      }
+
+      .preview-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        color: var(--primary-light);
+        text-align: center;
+      }
+
+      select.category-input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-size: 14px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-sm);
+  width: 100%;
+  color: var(--text-primary);
+  transition: var(--transition);
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='292.4' height='292.4'%3E%3Cpath fill='%238a2be2' d='M287 69.4a17.6 17.6 0 0 0-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 0 0 0 82.2c0 5 1.8 9.3 5.4 12.9l128 127.9c3.6 3.6 7.8 5.4 12.8 5.4s9.2-1.8 12.8-5.4L287 95c3.5-3.5 5.4-7.8 5.4-12.8 0-5-1.9-9.2-5.5-12.8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+}
+
+select.category-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+select.category-input option {
+  background: var(--bg-dark);
+  color: var(--text-primary);
+}
+      
+
+      @media screen and (max-width: 860px) {
+        header {
+          height: 64px;
+          font-size: 20px;
+        }
+        .main-container {
+          flex-direction: column;
+          padding: 16px;
+        }
+        .input-panel {
+          width: 100%;
+          max-width: initial;
+        }
+        .preview-panel {
+          padding: 24px 0 96px 0;
+          min-height: 400px;
+        }
+        .input {
+          margin-bottom: 20px;
+        }
+        .download-fab {
+          width: 52px;
+          height: 52px;
+          bottom: 16px;
+          right: 16px;
+        }
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-light);
+      }
+    </style>
+    <header>
+      <div class="title">Samarth Member Badge Generator</div>
+    </header>
+
+    <div class="main-container">
+      <div class="input-panel">
+        <div class="input">
+          <label>Profile Picture</label>
+          <button class="button" onclick="uploadImage()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            Upload Image
+          </button>
+          <input
+            class="profile-input"
+            type="file"
+            accept="image/*"
+            onchange="upload(event)"
+            hidden
+          />
+        </div>
+        <div class="input">
+          <label>Image Shape</label>
+          <div class="select-container">
+            <div
+              class="select"
+              id="original"
+              selected
+              onclick="changeShape('original')"
+            >
+              Original
+            </div>
+            <div class="select" id="square" onclick="changeShape('square')">
+              Square
+            </div>
+          </div>
+        </div>
+        <div class="input">
+          <label>Role</label>
+          <select
+            id="role-select"
+            class="category-input"
+            onchange="updateRole()"
+          >
+            <option class="option" value="member" selected>Member</option>
+          </select>
+        </div>
+        <div class="input">
+          <h2 class="preview-title">🎉 Member @ Samarth 2025</h2>
+        </div>
+      </div>
+      <div class="preview-panel">
+        <canvas></canvas>
+        <button class="download-fab" onclick="download()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            fill="#fff"
+          >
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path
+              d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <script>
+      const canvas = document.querySelector("canvas");
+      const ctx = canvas.getContext("2d");
+      let image = "";
+      let shape = "original";
+      let append = "";
+      let who = "member";
+      var banner;
+
+      const uploadImage = () => {
+        document.querySelector("input.profile-input").click();
+      };
+
+      const changeShape = (type) => {
+        const original = document.querySelector(
+          ".select-container .select#original"
+        );
+        const square = document.querySelector(
+          ".select-container .select#square"
+        );
+        shape = type;
+        switch (type) {
+          case "original": {
+            append = "";
+            original.setAttribute("selected", "");
+            square.removeAttribute("selected");
+            break;
+          }
+          case "square": {
+            append = "";
+            square.setAttribute("selected", "");
+            original.removeAttribute("selected");
+            break;
+          }
+        }
+        draw();
+      };
+
+      const upload = (e) => {
+        if (e && e.target.files && e.target.files[0]) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+              image = img;
+              draw();
+            };
+            img.src = event.target.result;
+          };
+          reader.readAsDataURL(e.target.files[0]);
+        }
+      };
+
+      const updateRole = () => {
+        const select = document.getElementById("role-select");
+        who = select.value;
+        draw();
+      };
+
+      const draw = () => {
+        banner = new Image();
+        banner.src = "./" + who + append + ".png";
+        banner.onload = () => {
+          if (image) {
+            switch (shape) {
+              case "original": {
+                canvas.width = image.width;
+                canvas.height = image.height;
+                ctx.drawImage(image, 0, 0);
+                break;
+              }
+              default: {
+                const size = Math.min(image.width, image.height);
+                canvas.width = 500;
+                canvas.height = 500;
+                const hRatio = canvas.width / image.width;
+                const vRatio = canvas.height / image.height;
+                const ratio = Math.max(hRatio, vRatio);
+                const x = (canvas.width - image.width * ratio) / 2;
+                const y = (canvas.height - image.height * ratio) / 2;
+                ctx.drawImage(
+                  image,
+                  0,
+                  0,
+                  image.width,
+                  image.height,
+                  x,
+                  y,
+                  image.width * ratio,
+                  image.height * ratio
+                );
+                break;
+              }
+            }
+          } else {
+            ctx.canvas.width = 540;
+            ctx.canvas.height = 540;
+            ctx.fillStyle = "rgba(30, 30, 30, 0.8)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+          }
+
+          const height = (banner.height / banner.width) * canvas.width;
+          const y = canvas.height - height;
+          const fontSize = canvas.width / 17.2;
+          const fontY = y + height * 0.7;
+          ctx.drawImage(
+            banner,
+            0,
+            0,
+            banner.width,
+            banner.height,
+            0,
+            y,
+            canvas.width,
+            height
+          );
+
+          ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.font = `${fontSize}px Google Sans, sans-serif`;
+
+          if (shape === "circle") {
+            ctx.globalCompositeOperation = "destination-in";
+            ctx.beginPath();
+            ctx.arc(
+              canvas.width / 2,
+              canvas.height / 2,
+              canvas.height / 2,
+              0,
+              Math.PI * 2
+            );
+            ctx.closePath();
+            ctx.fill();
+          }
+        };
+      };
+
+      const download = () => {
+        const a = document.createElement("a");
+        const url = canvas.toDataURL("image/png");
+        a.download = "member@samarth.png";
+        a.href = url;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      };
+
+      draw();
+    </script>
+  </body>
+</html>
